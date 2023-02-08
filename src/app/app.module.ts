@@ -1,16 +1,24 @@
 import { NgModule } from '@angular/core';
+import { MatButtonModule } from '@angular/material/button';
+import {MatInputModule} from '@angular/material/input';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { HomeCurrencyComponent } from './home-currency/home-currency.component';
+import { TargetCurrencyComponent } from './target-currency/target-currency.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeCurrencyComponent,
+    TargetCurrencyComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    MatButtonModule,
+    MatInputModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]
