@@ -1,1 +1,4 @@
-<p>home-currency works!</p>
+<mat-form-field [formGroup]="form" class="home-currency">
+  <mat-label>Home currency</mat-label>
+  <input [formControlName]="control" matInput value="Sushi" type="number" step=".01">
+</mat-form-field>

@@ -1,1 +1,4 @@
-<p>target-currency works!</p>
+<mat-form-field [formGroup]="form" class="foreign-currency">
+  <mat-label>Foreign currency</mat-label>
+  <input [formControlName]="control" matInput value="4.4" type="number" step=".01">
+</mat-form-field>

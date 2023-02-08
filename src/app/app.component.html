@@ -1,14 +1,14 @@
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <mat-label>Favorite food</mat-label>
-    <input matInput placeholder="Ex. Pizza" value="Sushi">
+<div class="container">
+<form class="example-form" [formGroup]="form">
+
+  <mat-form-field class="exchange rate">
+    <mat-label>Exchange rate</mat-label>
+    <input formControlName="fx" matInput value="Sushi" type="number" step=".01">
   </mat-form-field>
 
-  <mat-form-field class="example-full-width">
-    <mat-label>Leave a comment</mat-label>
-    <textarea matInput placeholder="Ex. It makes me feel..."></textarea>
-  </mat-form-field>
+  <div class="inputs">
+    <app-home-currency [form]="form" control="home"></app-home-currency>
+    <app-target-currency [form]="form" control="foreign"></app-target-currency>
+  </div>
 </form>
-
-<app-home-currency></app-home-currency>
-<app-target-currency></app-target-currency>
+</div>
