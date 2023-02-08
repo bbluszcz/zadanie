@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { CurrentRateResponse } from 'src/currentRatesResponse';
+import { CurrentRateResponse } from './interfaces';
 
 @Injectable({
   providedIn: 'root'

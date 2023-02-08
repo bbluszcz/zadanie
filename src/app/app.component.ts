@@ -2,6 +2,7 @@ import { NbpHttpService } from './nbp.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime, map, mergeMap, Subject, takeUntil, tap } from 'rxjs';
+import { ControlsOf, RootForm } from './interfaces';
 
 @Component({
   selector: 'app-root',
@@ -10,9 +11,8 @@ import { debounceTime, map, mergeMap, Subject, takeUntil, tap } from 'rxjs';
 })
 export class AppComponent implements OnInit, OnDestroy {
   readonly fxCode = 'EUR'
-  form: FormGroup;
+  public form: FormGroup<ControlsOf<RootForm>>;
   private _destroy$: Subject<void> = new Subject<void>();
-
 
   constructor(private fb: FormBuilder, private nbpHttpService: NbpHttpService){
   }
@@ -25,7 +25,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   private buildForm() {
-    this.form = this.fb.group({
+    this.form = this.fb.group<ControlsOf<RootForm>>({
       home: this.fb.control(null),
       foreign: this.fb.control(null),
       fx: this.fb.control({disabled: true, value: null}),
@@ -46,7 +46,7 @@ export class AppComponent implements OnInit, OnDestroy {
       debounceTime(250),
       mergeMap(() => this.getCurrentRates())
       ).subscribe(fxValue => {
-      const homeValue = this.form.get('home')?.value;
+      const homeValue = this.form.get('home')?.value as number;
       if (!fxValue) return;
       const roundedNumber =  Math.round( (homeValue / fxValue) * 100) / 100;
       this.form.get('foreign')?.setValue( roundedNumber, {emitEvent: false})
@@ -56,7 +56,7 @@ export class AppComponent implements OnInit, OnDestroy {
       debounceTime(250),
       mergeMap(() => this.getCurrentRates())
       ).subscribe(fxValue => {
-      const foreignValue = this.form.get('foreign')?.value;
+      const foreignValue = this.form.get('foreign')?.value as number;
       if (!fxValue) return;
       const roundedNumber =  Math.round( (foreignValue * fxValue) * 100) / 100;
       this.form.get('home')?.setValue(roundedNumber, {emitEvent : false})
